@@ -2,6 +2,7 @@ package com.example.assignment6.resource;
 
 
 
+import com.example.assignment6.model.Album;
 import com.example.assignment6.model.FirebaseUser;
 import com.example.assignment6.model.Photo;
 import com.example.assignment6.service.FirebaseService;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/photos")
+@CrossOrigin
 public class PhotoResource {
     @Autowired
     private PhotoService photoService;
@@ -29,14 +31,14 @@ public class PhotoResource {
         return photoService.savePhoto(photo);
     }
     @GetMapping
-    public List<Photo> getAllPhoto(@RequestBody Photo photo, @RequestHeader(name = "idToken") String idToken) throws IOException, FirebaseAuthException {
+    public List<Photo> getAllPhoto(@RequestHeader(name = "idToken") String idToken) throws IOException, FirebaseAuthException {
         FirebaseUser firebaseUser = firebaseService.authenticate(idToken);
         if (firebaseUser != null){
             return photoService.getAllPhoto();
         }
         return null;
-
     }
+
 
     @GetMapping("/find")
     public Photo getPhotoById(@RequestParam("id")String id){

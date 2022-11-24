@@ -11,6 +11,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.stereotype.Service;
 
+
+
 import java.io.FileInputStream;
 import java.io.IOException;
 
@@ -19,7 +21,7 @@ public class FirebaseService {
     public FirebaseApp initializeFirebase() throws IOException {
 
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        Resource resource = resolver.getResource("classpath:gmhbackend-assignment6-privateKey.json");
+        Resource resource = resolver.getResource("classpath:gmh-photoapplication-privateKey.json");
 
         FileInputStream serviceAccount = new FileInputStream(resource.getFile());
 
@@ -27,7 +29,13 @@ public class FirebaseService {
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                 .build();
 
-        return FirebaseApp.initializeApp(options);
+        FirebaseApp app;
+        if (FirebaseApp.getApps().isEmpty()) {
+            app = FirebaseApp.initializeApp(options, "GMH-PhotoApplication");
+        } else {
+            app = FirebaseApp.getApps().get(0);
+        }
+        return app;
 
     }
 
