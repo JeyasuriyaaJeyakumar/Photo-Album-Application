@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/albums")
+@CrossOrigin
 
 public class AlbumResource {
     @Autowired
