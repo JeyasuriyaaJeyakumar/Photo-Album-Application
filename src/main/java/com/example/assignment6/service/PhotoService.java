@@ -34,4 +34,13 @@ public class PhotoService {
         return photoRepository.findById(id).get();
     }
 
+    public List<Photo> getPhotoByAlbumId(String albumId) {
+        return photoRepository.findByAlbumId(albumId);
+    }
+
+    public List<Photo> getPhotoByPhotoId(String id) {
+        return photoRepository.findPhotoById(id);
+    }
+
+
 }

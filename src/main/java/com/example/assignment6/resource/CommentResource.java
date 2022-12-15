@@ -1,7 +1,9 @@
 package com.example.assignment6.resource;
 
 
+import com.example.assignment6.exception.RestrictedInfoException;
 import com.example.assignment6.model.Comment;
+import com.example.assignment6.model.Photo;
 import com.example.assignment6.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +32,14 @@ public class CommentResource {
     @GetMapping("/find")
     public Comment getCommentById(@RequestParam("id")String id){
         return commentService.getCommentById(id);
+    }
+
+    @GetMapping("/find/{photoId}")
+    public List<Comment> getCommentByPhotoId(@PathVariable(name = "photoId")String photoId) throws RestrictedInfoException {
+        if (photoId.equalsIgnoreCase("root")){
+            throw new RestrictedInfoException();
+        }
+        return commentService.getCommentByPhotoId(photoId);
     }
 
     //PUT methods

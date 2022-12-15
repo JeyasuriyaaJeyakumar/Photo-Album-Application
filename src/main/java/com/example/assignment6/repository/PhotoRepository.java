@@ -9,5 +9,8 @@ import java.util.List;
 
 public interface PhotoRepository extends MongoRepository<Photo, String> {
 
-    List<Photo> findAllById(String id);
+    List<Photo> findPhotoById(String id);
+
+    List<Photo> findByAlbumId(String albumId);
+
 }

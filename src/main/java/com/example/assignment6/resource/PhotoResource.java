@@ -2,9 +2,11 @@ package com.example.assignment6.resource;
 
 
 
+import com.example.assignment6.exception.RestrictedInfoException;
 import com.example.assignment6.model.Album;
 import com.example.assignment6.model.FirebaseUser;
 import com.example.assignment6.model.Photo;
+import com.example.assignment6.model.User;
 import com.example.assignment6.service.FirebaseService;
 import com.example.assignment6.service.PhotoService;
 import com.google.firebase.auth.FirebaseAuthException;
@@ -39,10 +41,32 @@ public class PhotoResource {
         return null;
     }
 
-
     @GetMapping("/find")
-    public Photo getPhotoById(@RequestParam("id")String id){
+    public Photo getPhotoById(@RequestParam(value = "id")String id){
         return photoService.getPhotoById(id);
+    }
+    @GetMapping("/find/{id}/photo")
+    @ResponseBody
+    public List<Photo> getPhotoByPhotoId(@PathVariable(name = "id")String id, @RequestHeader(name = "idToken") String idToken) throws RestrictedInfoException, IOException, FirebaseAuthException {
+
+        FirebaseUser firebaseUser = firebaseService.authenticate(idToken);
+        if (firebaseUser != null){
+            if (id.equalsIgnoreCase("root")){
+                throw new RestrictedInfoException();
+            }
+            return photoService.getPhotoByPhotoId(id);
+        }
+        return null;
+    }
+
+
+
+   @GetMapping("/find/{albumId}")
+    public List<Photo> getPhotoByAlbumId(@PathVariable(name = "albumId")String albumId) throws RestrictedInfoException {
+        if (albumId.equalsIgnoreCase("root")){
+            throw new RestrictedInfoException();
+        }
+        return photoService.getPhotoByAlbumId(albumId);
     }
 
     //PUT methods

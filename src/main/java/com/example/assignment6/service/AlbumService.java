@@ -25,6 +25,9 @@ public class AlbumService {
     public Album updateAlbum(Album album) {
         return albumRepository.save(album);
     }
+    public Album updateAlbumCover(Album coverPhotoUrl){
+       return albumRepository.save(coverPhotoUrl);
+    }
 
 
     public void deleteAlbum(String id) {

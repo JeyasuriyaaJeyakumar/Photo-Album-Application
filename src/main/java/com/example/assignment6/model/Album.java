@@ -47,8 +47,8 @@ public class Album {
         return coverPhotoUrl;
     }
 
-    public void setCoverPhotoUrl(String coverPhotoUrl) {
-        this.coverPhotoUrl = coverPhotoUrl;
+    public String setCoverPhotoUrl(String coverPhotoUrl) {
+        return this.coverPhotoUrl = coverPhotoUrl;
     }
 
     public String getCreatedBy() {

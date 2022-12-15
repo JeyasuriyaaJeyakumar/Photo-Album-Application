@@ -10,18 +10,19 @@ import java.util.Date;
 public class Photo {
     @Id
     private String id;
-    private int albumId;
+    private String albumId;
     private String coverPhotoUrl;
     @ValidName
     private String createdBy;
     @CreatedDate
     private Date dateCreated;
 
-    public Photo(int albumId, String coverPhotoUrl, String createdBy) {
+    public Photo(String albumId, String coverPhotoUrl, String createdBy) {
         this.albumId = albumId;
         this.coverPhotoUrl = coverPhotoUrl;
         this.createdBy = createdBy;
     }
+
 
     public String getId() {
         return id;
@@ -31,11 +32,11 @@ public class Photo {
         this.id = id;
     }
 
-    public int getAlbumId() {
+    public String  getAlbumId() {
         return albumId;
     }
 
-    public void setAlbumId(int albumId) {
+    public void setAlbumId(String albumId) {
         this.albumId = albumId;
     }
 

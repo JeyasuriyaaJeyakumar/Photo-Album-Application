@@ -12,7 +12,7 @@ public class Comment {
 
     @Id
     private String id;
-    private int photoId;
+    private String photoId;
     @Length(min = 5)
     private String message;
     @ValidName
@@ -20,7 +20,7 @@ public class Comment {
     @CreatedDate
     private Date dateCreated;
 
-    public Comment(int photoId, String message, String createdBy) {
+    public Comment(String photoId, String message, String createdBy) {
         this.photoId = photoId;
         this.message = message;
         this.createdBy = createdBy;
@@ -34,11 +34,11 @@ public class Comment {
         this.id = id;
     }
 
-    public int getPhotoId() {
+    public String getPhotoId() {
         return photoId;
     }
 
-    public void setPhotoId(int photoId) {
+    public void setPhotoId(String photoId) {
         this.photoId = photoId;
     }
 

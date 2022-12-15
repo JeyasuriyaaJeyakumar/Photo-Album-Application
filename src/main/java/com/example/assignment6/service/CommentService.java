@@ -2,6 +2,7 @@ package com.example.assignment6.service;
 
 
 import com.example.assignment6.model.Comment;
+import com.example.assignment6.model.Photo;
 import com.example.assignment6.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,5 +34,10 @@ public class CommentService {
     public Comment getCommentById(String id) {
         return commentRepository.findById(id).get();
     }
+
+    public List<Comment> getCommentByPhotoId(String photoId) {
+        return commentRepository.findByPhotoId(photoId);
+    }
+
 
 }
